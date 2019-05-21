@@ -6,7 +6,6 @@ import com.demo.domain.Customer;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.springframework.orm.hibernate4.SessionFactoryUtils;
 
 import java.util.List;
 
@@ -82,7 +81,7 @@ public class UserDao {
         try {
             t = session.beginTransaction();
             //Customer customer = getById(id);
-            Object customer = session.get(Customer.class,id);
+            Object customer = session.get(Customer.class, id);
             session.delete(customer);
             t.commit();
         } catch (RuntimeException e) {
@@ -93,9 +92,15 @@ public class UserDao {
 
     }
 
-    /*
-     * 根据id查询一个User数据
+    /**
+     * @描述:根据id返回一个customer
+     * @参数 [id]
+     * @返回值 com.demo.domain.Customer
+     * @创建人 yinxiuchaun
+     * @创建时间 2019/5/21
+     * @修改人和其它信息
      */
+
     public Customer getById(int id) {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
@@ -112,6 +117,14 @@ public class UserDao {
         }
     }
 
+    /**
+     * @描述：返回所有数据
+     * @参数 []
+     * @返回值 java.util.List<com.demo.domain.Customer>
+     * @创建人 yinxiuchaun
+     * @创建时间 2019/5/21
+     * @修改人和其它信息
+     */
     public List<Customer> findAll() {
         Session session = HibernateUtils.openSession();
         Transaction tx = null;
