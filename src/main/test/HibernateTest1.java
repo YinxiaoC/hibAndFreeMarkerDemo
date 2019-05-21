@@ -14,6 +14,17 @@ import java.util.List;
  * @CreateTime: 2019-05-20 17:26
  * @Description: 测试
  */
+
+//hibernate执行过程
+//通过Configuration().configure();读取并解析hibernate.cfg.xml配置文件。
+//由hibernate.cfg.xml中的读取解析映射信息。
+//通过config.buildSessionFactory();得到sessionFactory。
+//sessionFactory.openSession();得到session。
+//session.beginTransaction();开启事务。
+//persistent operate; 执行你自己的操作。
+//session.getTransaction().commit();提交事务。
+//关闭session。
+//关闭sessionFactory。
 public class HibernateTest1 {
 
     // 保存一个Customer
@@ -25,9 +36,11 @@ public class HibernateTest1 {
         c.setAddress("武汉");
 
         // 使用Hibernate的API来完成将Customer信息保存到mysql数据库中的操作
-        Configuration config = new Configuration().configure(); // Hibernate框架加载hibernate.cfg.xml文件
+        // Hibernate框架加载hibernate.cfg.xml文件
+        Configuration config = new Configuration().configure();
         SessionFactory sessionFactory = config.buildSessionFactory();
-        Session session = sessionFactory.openSession(); // 相当于得到一个Connection
+        // 相当于得到一个Connection（得到session）
+        Session session = sessionFactory.openSession();
         // 开启事务
         session.beginTransaction();
 
@@ -72,7 +85,7 @@ public class HibernateTest1 {
 
         // 根据业务来编写代码
         Customer c = session.get(Customer.class, 1);
-        c.setName("郑敏");
+        c.setName("树叶");
         session.update(c); // 修改操作
 
         // 事务提交
